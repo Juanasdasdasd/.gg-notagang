@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NotAGang</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #0d0d0d;
+      --accent: #ff0000;
+      --text: #eaeaea;
+      --muted: #9a9a9a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('background.jpg') center/cover no-repeat;
+      filter: blur(12px) brightness(0.5);
+      transform: scale(1.1);
+      z-index: -1;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    header span {
+      color: var(--accent);
+    }
+
+    header p {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    .scroll {
+      position: absolute;
+      bottom: 30px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 80px 10%;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+
+    .member {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(124,124,255,0.15);
+    }
+
+    .member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 2px solid var(--accent);
+    }
+
+    .member h3 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .member p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery video {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+      cursor: pointer;
+      filter: brightness(0.7);
+    }
+
+    .video-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      border-radius: 14px;
+      cursor: pointer;
+      filter: brightness(0.7);
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .video-wrapper:hover video {
+      transform: scale(1.05);
+      filter: brightness(0.9);
+    }
+
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: white;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .video-modal video {
+      width: 80%;
+      max-height: 80vh;
+      border-radius: 18px;
+      outline: none;
+    }
+
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: white;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .gallery img:hover,
+    .gallery video:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Música de fondo -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <header>
+    <h1>Not<span>A</span>Gang</h1>
+    <p>😈</p>
+    <div class="scroll">Baja Pa! ↓</div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Miembros principales</h2>
+    <div class="members">
+      <div class="member">
+        <img src="hash.png" alt="Miembro 1">
+        <h3>Hash</h3>
+        <p>Owner</p>
+      </div>
+      <div class="member">
+        <img src="bobi.png" alt="Miembro 2">
+        <h3>Bobi</h3>
+        <p>Owner</p>
+      </div>
+      <div class="member">
+        <img src="salas.png" alt="Miembro 3">
+        <h3>Salas</h3>
+        <p>Staff</p>
+      </div>
+            <div class="member">
+        <img src="r4yj.png" alt="Miembro 2">
+        <h3>R4yj</h3>
+        <p>Owner</p>
+      </div>
+            <div class="member">
+        <img src="fabo.png" alt="Miembro 2">
+        <h3>Fabo</h3>
+        <p>Staff</p>
+      </div>
+            <div class="member">
+        <img src="mate.png" alt="Miembro 2">
+        <h3>Mate</h3>
+        <p>Staff</p>
+      </div>
+            
+            <div class="member">
+        <img src="felsera.png" alt="Miembro 2">
+        <h3>Felsera</h3>
+        <p>Staff</p>
+      </div>
+            
+            <div class="member">
+        <img src="juli.png" alt="Miembro 2">
+        <h3>Juli</h3>
+        <p>Staff</p>
+      </div>
+            
+            <div class="member">
+        <img src="rodri.png" alt="Miembro 2">
+        <h3>Rodri</h3>
+        <p>Staff</p>
+      </div>
+
+      <div class="member">
+        <img src="otto.png" alt="Miembro 2">
+        <h3>Cdulas</h3>
+        <p>Staff</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Galería</h2>
+    <div class="gallery">
+      <div class="video-wrapper">
+        <video src="notagang.mp4"></video>
+        <div class="play-btn">▶</div>
+      </div>
+      <div class="video-wrapper">
+        <video src="notagang1.mp4"></video>
+        <div class="play-btn">▶</div>
+      </div>
+      <div class="video-wrapper">
+        <video src="notagang2.mp4"></video>
+        <div class="play-btn">▶</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+   .gg/notagang · Floy Gangoso
+  </footer>
+
+  <div class="video-modal" id="videoModal">
+    <video id="modalVideo" controls></video>
+  </div>
+
+    <script>
+    const bgMusic = document.getElementById('bgMusic');
+    
+
+    // Reproducción tras interacción del usuario (política del navegador)
+    const enableMusic = () => {
+      bgMusic.play().catch(() => {});
+      document.removeEventListener('click', enableMusic);
+    };
+    document.addEventListener('click', enableMusic);
+
+    
+    bgMusic.volume = 0.6;
+
+    const wrappers = document.querySelectorAll('.video-wrapper video');
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+
+    wrappers.forEach(video => {
+      video.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalVideo.src = video.src;
+        modalVideo.currentTime = 0;
+        modalVideo.volume = 1;
+        modalVideo.play();
+        bgMusic.volume = 0.15;
+      });
+    });
+
+    modal.addEventListener('click', () => {
+      modalVideo.pause();
+      modalVideo.src = '';
+      modal.style.display = 'none';
+      bgMusic.volume = 0.6;
+    });
+  </script>
+</body>
+</html>
